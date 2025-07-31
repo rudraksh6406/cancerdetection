@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  cancer-prediction:
+    build: .
+    container_name: cancer-prediction-app
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      - PYTHONPATH=/app
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    
+  # Optional: Add a Jupyter notebook service for development
+  jupyter:
+    build: .
+    container_name: cancer-prediction-jupyter
+    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=''
+    volumes:
+      - ./data:/app/data
+      - ./notebooks:/app/notebooks
+    ports:
+      - "8888:8888"
+    profiles:
+      - dev 
