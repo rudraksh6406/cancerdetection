@@ -61,4 +61,8 @@ coverage.xml
 .pyre/
 
 # Data
-/data/ 
+/data/
+
+# Model files
+*.joblib
+model.joblib 
